@@ -1,5 +1,5 @@
 module.exports = {
-  async handleCozeData(ctx) {
+  async createPerson(ctx) {
     try {
       const { name, age, sex, email } = ctx.request.body;
 
@@ -7,20 +7,20 @@ module.exports = {
         return ctx.badRequest('Name and email are required.');
       }
 
-      // Lưu dữ liệu vào collection "Person"
+      // Tạo mới một bản ghi trong bảng Person
       const newPerson = await strapi.entityService.create('api::person.person', {
         data: {
           name,
           age,
           sex,
-          email,
-        },
+          email
+        }
       });
 
-      ctx.send({ message: 'Data received successfully!', person: newPerson });
-    } catch (error) {
-      console.error('Error saving data:', error);
-      ctx.send({ error: 'Failed to save data' });
+      ctx.send({ message: 'Person created successfully', person: newPerson });
+    } catch (err) {
+      console.error('Error:', err);
+      ctx.send({ error: 'Failed to create person' });
     }
-  },
+  }
 };
