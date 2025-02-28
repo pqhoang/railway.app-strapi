@@ -6,6 +6,7 @@ export interface ApiPersonPerson extends Struct.CollectionTypeSchema {
     singularName: 'person';
     pluralName: 'people';
     displayName: 'Person';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -17,6 +18,7 @@ export interface ApiPersonPerson extends Struct.CollectionTypeSchema {
     email: Schema.Attribute.Email &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
+    avatar: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
